@@ -231,17 +231,28 @@ header {
   text-decoration: none;
 }
 .pages {
+  /* display: block; */
   font-size: 14px;
   line-height: 1.17;
   color: var(--primary-text-color);
   font-weight: 500;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.active,
-.current {
+.active {
+  position: relative;
   color: var(--accent-color);
 }
-
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -33px;
+  width: 100%;
+  height: 4px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+}
 .pages:hover,
 .pages:focus {
   color: var(--accent-color);
@@ -300,9 +311,15 @@ header {
   font-weight: 500;
   padding: 6px 22px;
   border-radius: 4px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .tabs:hover,
 .tabs:focus {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  cursor: pointer;
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
 }
@@ -429,6 +446,7 @@ header {
   margin-top: 30px;
   margin-left: 30px;
   flex-basis: calc((100% - 90px) / 3);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .examples-mockups:hover,
 .examples-mockups:focus {
@@ -446,7 +464,30 @@ header {
   border-bottom: 1px solid #eeeeee;
   border-left: 1px solid #eeeeee;
 }
-
+/*------СИНИЙ ВЫЕЗЖАЮЩИЙ ОВЕРЛЕЙ ПОРТФОЛИО*/
+.thumb {
+  position: relative;
+  overflow: hidden;
+}
+.mockups-info {
+  position: absolute;
+  left: 0;
+  top: 200%;
+  transform: translate(0, -100%);
+  width: 100%;
+  height: 100%;
+  padding: 63px 24px;
+  color: #ffffff;
+  background: rgba(33, 150, 243, 0.9);
+  font-size: 18px;
+  line-height: 1.56;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.examples-mockups:hover .mockups-info,
+.examples-mockups:focus .mockups-info {
+  transform: translate(0, -100%) translateY(-100%);
+}
+/*------СИНИЙ ВЫЕЗЖАЮЩИЙ ОВЕРЛЕЙ*/
 .advan-descrip {
   font-size: 14px;
   line-height: 1.17;
@@ -461,6 +502,26 @@ header {
   font-weight: 400;
 }
 
+.direction {
+  position: relative;
+}
+.direction-label {
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1.17;
+  font-weight: 700;
+  position: absolute;
+  text-align: center;
+  left: 30px;
+  bottom: 0px;
+  height: 70px;
+  width: 370px;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  color: #ffffff;
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
 .direction-name {
   display: flex;
   flex-wrap: wrap;
@@ -471,6 +532,7 @@ header {
 }
 
 .direction-img {
+  position: relative;
   margin-top: 30px;
   margin-left: 30px;
   flex-basis: calc((100% - 30px * 3) / 3);
@@ -494,13 +556,12 @@ header {
   padding: 0;
 }
 
-li > button:hover,
+/* li > button:hover,
 li > button:focus {
   background-color: var(--accent-color);
   color: #ffffff;
   cursor: pointer;
-}
-
+} */
 footer {
   display: block;
   padding: 60px 0 60px 0;
@@ -531,12 +592,10 @@ address {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1;
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(0, 0, 0, 0.2);
 }
-/* прячет модальное окно */
 .backdrop.is-hidden {
   pointer-events: none;
   opacity: 0;
